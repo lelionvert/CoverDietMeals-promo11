@@ -29,7 +29,8 @@ namespace CoverDietMealLibrary
         
         internal bool IsPresentOn(DayOfWeek dayOfWeek)
         {
-            return dayOfWeek <= reservation.CheckOut.DayOfWeek;
+            return dayOfWeek >= reservation.CheckIn.DayOfWeek
+                && dayOfWeek <= reservation.CheckOut.DayOfWeek;
         }
     }
 }

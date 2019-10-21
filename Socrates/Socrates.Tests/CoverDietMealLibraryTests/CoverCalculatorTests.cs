@@ -76,7 +76,7 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             var reservation = new Reservation(
                         Choice.Single,
                         checkin: new CheckTime(
-                            DayOfWeek.Thursday
+                            DayOfWeek.Friday
                         ),
                         checkout: new CheckTime(
                             DayOfWeek.Friday
@@ -101,7 +101,7 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             var reservation = new Reservation(
                         Choice.Single,
                         checkin: new CheckTime(
-                            DayOfWeek.Thursday
+                            DayOfWeek.Friday
                         ),
                         checkout: new CheckTime(
                             DayOfWeek.Friday
@@ -142,6 +142,31 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
 
             //Then
             Check.That(nbCovers).IsEqualTo(2);
+        }
+
+        [Test]
+        public void OnAThursday_1_PescatarianParticipant_Return_0_PescatarianCovers()
+        {
+            //Given
+            var reservation = new Reservation(
+                        Choice.Single,
+                        checkin: new CheckTime(
+                            DayOfWeek.Friday
+                        ),
+                        checkout: new CheckTime(
+                            DayOfWeek.Saturday
+                            )
+                        );
+            var participant = new Participant(
+                Diet.Pescatarian,
+                reservation
+            );
+
+            //When
+            int nbCovers = CoverCalculator.GetPescatarianCovers(participant, DayOfWeek.Thursday);
+
+            //Then
+            Check.That(nbCovers).IsEqualTo(0);
         }
     }
 }
