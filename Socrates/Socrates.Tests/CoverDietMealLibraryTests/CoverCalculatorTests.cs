@@ -23,5 +23,21 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             //Then
             Check.That(nbCovers).IsEqualTo(2);
         }
+
+        [Test]
+        public void OnADay_2_Participants_Return_4_Covers()
+        {
+            //Given
+            var participants = new List<Participant>() { 
+                new Participant(),
+                new Participant()
+            };
+
+            //When
+            int nbCovers = CoverCalculator.GetCovers(participants);
+
+            //Then
+            Check.That(nbCovers).IsEqualTo(4);
+        }
     }
 }
