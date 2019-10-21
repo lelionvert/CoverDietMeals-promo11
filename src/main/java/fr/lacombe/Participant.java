@@ -31,6 +31,9 @@ class Participant {
     }
 
     int calculateNbMeals() {
+        if (departureDay == DayOfWeek.FRIDAY) {
+            return 2;
+        }
         return 4;
     }
 }

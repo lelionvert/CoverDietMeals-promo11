@@ -12,4 +12,11 @@ public class ParticipantTest {
         Participant participant = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
         Assertions.assertThat(participant.calculateNbMeals()).isEqualTo(4);
     }
+
+    @Test
+    public void calculateNbMeals2() {
+        Participant participant = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
+        Assertions.assertThat(participant.calculateNbMeals()).isEqualTo(2);
+    }
+
 }
