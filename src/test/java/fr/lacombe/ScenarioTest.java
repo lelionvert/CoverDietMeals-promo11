@@ -38,4 +38,19 @@ public class ScenarioTest {
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);
     }
+
+    @Test
+    @Ignore
+    public void number_of_pescatarian_covers_is_two_for_two_participants_one_normal_one_pescatarian_two_days() {
+        // Given
+        Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        Participant norman = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        CoversCounter coversCounter = new CoversCounter(asList(bruno, norman));
+
+        // When
+        String pescatarianCovers = coversCounter.getResult();
+
+        // Then
+        Assertions.assertThat(pescatarianCovers).isEqualTo("2 covers, p, Friday \n 2 covers, p, Saturday");
+    }
 }

@@ -91,5 +91,18 @@ public class CoversCounterTest {
         Assertions.assertThat(pescatarianCovers).isEqualTo(4);
     }
 
+    @Test
+    public void numbers_of_pescatarians_diet_is_4_for_two_meals_two_participants_two_days() {
+        // Given
+        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        CoversCounter coversCounter = new CoversCounter();
+
+        // When
+        int pescatarianCovers = coversCounter.getPescatarianCovers(Arrays.asList(participant1, participant2));
+
+        // Then
+        Assertions.assertThat(pescatarianCovers).isEqualTo(4);
+    }
 
 }
