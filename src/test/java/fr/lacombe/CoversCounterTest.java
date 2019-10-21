@@ -32,16 +32,16 @@ public class CoversCounterTest {
     }
 
     @Test
-    public void numbers_of_pescatarians_diet_is_2_for_two_meal_one_participant() {
+    public void numbers_of_pescatarians_diet_is_0_for_two_meal_one_participant() {
         // Given
-        Participant participant = new Participant("Pescatarian", "Friday");
+        Participant participant = new Participant("Normal", "Friday");
         CoversCounter coversCounter = new CoversCounter();
 
         // When
         int pescatarianCovers = coversCounter.getPescatarianCovers(participant);
 
         // Then
-        Assertions.assertThat(pescatarianCovers).isEqualTo(2);
+        Assertions.assertThat(pescatarianCovers).isEqualTo(0);
     }
 
 
