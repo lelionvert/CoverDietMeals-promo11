@@ -3,7 +3,7 @@ package fr.lacombe;
 public class Participant {
     private String diet;
 
-    public Participant(String diet, String day) {
+    public Participant(String diet) {
         this.diet = diet;
     }
 
