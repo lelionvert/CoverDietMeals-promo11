@@ -15,10 +15,10 @@ public class ScenarioTest {
     public void number_of_pescatarian_covers_is_two_for_one_pescatarian_participant_one_day() {
         // Given
         Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY);
-        CoversCounter coversCounter = new CoversCounter();
+        CoversCounter coversCounter = new CoversCounter(Collections.singletonList(bruno));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers(Collections.singletonList(bruno));
+        int pescatarianCovers = coversCounter.getPescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);
@@ -30,10 +30,10 @@ public class ScenarioTest {
         // Given
         Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY);
         Participant norman = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY);
-        CoversCounter coversCounter = new CoversCounter();
+        CoversCounter coversCounter = new CoversCounter(asList(bruno, norman));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers(asList(bruno, norman));
+        int pescatarianCovers = coversCounter.getPescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);

@@ -4,29 +4,29 @@ import java.time.DayOfWeek;
 
 class Participant {
     private DietType diet;
-    private DayOfWeek day;
+    private DayOfWeek arrivalDay;
     private DayOfWeek departureDay;
 
-    Participant(DietType diet, DayOfWeek day) {
+    Participant(DietType diet, DayOfWeek arrivalDay) {
         this.diet = diet;
-        this.day = day;
+        this.arrivalDay = arrivalDay;
     }
 
-    public Participant(DietType diet, DayOfWeek arrivalDay, DayOfWeek departureDay) {
+    Participant(DietType diet, DayOfWeek arrivalDay, DayOfWeek departureDay) {
         this.diet = diet;
-        day = arrivalDay;
+        this.arrivalDay = arrivalDay;
         this.departureDay = departureDay;
     }
 
-    DayOfWeek getDay() {
-        return day;
+    DayOfWeek getArrivalDay() {
+        return arrivalDay;
     }
 
     boolean isPescatarian() {
         return diet.equals(DietType.PESCATARIAN);
     }
 
-    public DayOfWeek getDepartureDay() {
+    DayOfWeek getDepartureDay() {
         return departureDay;
     }
 }
