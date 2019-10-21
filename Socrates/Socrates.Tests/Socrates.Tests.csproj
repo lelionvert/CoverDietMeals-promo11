@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CoverDietMealLibrary\CoverDietMealLibrary.csproj" />
     <ProjectReference Include="..\Library\ColdMealLibrary.csproj" />
     <ProjectReference Include="..\RegistrationLibrary\RegistrationLibrary.csproj" />
   </ItemGroup>

@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Library\ColdMealLibrary.csproj" />
+    <ProjectReference Include="..\RegistrationLibrary\RegistrationLibrary.csproj" />
+  </ItemGroup>
+
+</Project>
