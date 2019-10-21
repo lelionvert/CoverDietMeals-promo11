@@ -1,23 +1,19 @@
 package fr.lacombe;
 
-public class Participant {
+class Participant {
     private String diet;
     private String day;
 
-    public Participant(String diet) {
-        this.diet = diet;
-    }
-
-    public Participant(String diet, String day) {
+    Participant(String diet, String day) {
         this.diet = diet;
         this.day = day;
     }
 
-    public String getDay() {
+    String getDay() {
         return day;
     }
 
-    public String getDiet() {
+    String getDiet() {
         return diet;
     }
 }

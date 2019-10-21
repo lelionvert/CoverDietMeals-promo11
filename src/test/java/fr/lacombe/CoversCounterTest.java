@@ -8,7 +8,7 @@ public class CoversCounterTest {
     @Test
     public void numbers_of_pescatarians_diet_is_1_for_one_meal_one_participant() {
         // Given
-        Participant participant = new Participant("Pescatarian");
+        Participant participant = new Participant("Pescatarian", "Thursday");
         CoversCounter coversCounter = new CoversCounter();
 
         // When
@@ -21,7 +21,7 @@ public class CoversCounterTest {
     @Test
     public void numbers_of_pescatarians_diet_is_0_for_one_meal_one_normal_diet_participant() {
         // Given
-        Participant participant = new Participant("Normal");
+        Participant participant = new Participant("Normal", "Thursday");
         CoversCounter coversCounter = new CoversCounter();
 
         // When
