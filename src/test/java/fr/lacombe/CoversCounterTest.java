@@ -55,7 +55,7 @@ public class CoversCounterTest {
         CoversCounter coversCounter = new CoversCounter();
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers(Arrays.asList(participant1,participant2));
+        int pescatarianCovers = coversCounter.getPescatarianCovers(Arrays.asList(participant1, participant2));
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(0);
@@ -69,10 +69,25 @@ public class CoversCounterTest {
         CoversCounter coversCounter = new CoversCounter();
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers(Arrays.asList(participant1,participant2));
+        int pescatarianCovers = coversCounter.getPescatarianCovers(Arrays.asList(participant1, participant2));
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);
+    }
+
+    @Test
+    public void numbers_of_pescatarians_diet_is_4_for_two_meals_three_participants() {
+        // Given
+        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY);
+        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY);
+        Participant participant3 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY);
+        CoversCounter coversCounter = new CoversCounter();
+
+        // When
+        int pescatarianCovers = coversCounter.getPescatarianCovers(Arrays.asList(participant1, participant2, participant3));
+
+        // Then
+        Assertions.assertThat(pescatarianCovers).isEqualTo(4);
     }
 
 

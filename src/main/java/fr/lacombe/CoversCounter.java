@@ -16,11 +16,13 @@ class CoversCounter {
     }
 
     int getPescatarianCovers(List<Participant> participants) {
+        int i = 0;
         for (Participant participant : participants) {
             if (participant.getDiet().equals(DietType.PESCATARIAN)) {
-                return 2;
+
+                i += 2;
             }
         }
-        return 0;
+        return i;
     }
 }
