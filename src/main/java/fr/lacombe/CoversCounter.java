@@ -1,6 +1,7 @@
 package fr.lacombe;
 
 import java.time.DayOfWeek;
+import java.util.List;
 
 class CoversCounter {
 
@@ -10,6 +11,13 @@ class CoversCounter {
                 return 2;
             }
             return 1;
+        }
+        return 0;
+    }
+
+    int getPescatarianCovers(List<Participant> participants) {
+        if (participants.get(1).getDiet().equals(DietType.PESCATARIAN)) {
+            return 2;
         }
         return 0;
     }

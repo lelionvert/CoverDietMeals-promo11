@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.time.DayOfWeek;
+import java.util.Arrays;
 
 public class CoversCounterTest {
 
@@ -44,6 +45,34 @@ public class CoversCounterTest {
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(0);
+    }
+
+    @Test
+    public void numbers_of_pescatarians_diet_is_0_for_two_meal_two_participants() {
+        // Given
+        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY);
+        Participant participant2 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY);
+        CoversCounter coversCounter = new CoversCounter();
+
+        // When
+        int pescatarianCovers = coversCounter.getPescatarianCovers(Arrays.asList(participant1,participant2));
+
+        // Then
+        Assertions.assertThat(pescatarianCovers).isEqualTo(0);
+    }
+
+    @Test
+    public void numbers_of_pescatarians_diet_is_2_for_two_meals_two_participants() {
+        // Given
+        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY);
+        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY);
+        CoversCounter coversCounter = new CoversCounter();
+
+        // When
+        int pescatarianCovers = coversCounter.getPescatarianCovers(Arrays.asList(participant1,participant2));
+
+        // Then
+        Assertions.assertThat(pescatarianCovers).isEqualTo(2);
     }
 
 
