@@ -7,15 +7,15 @@ class CoversCounter {
 
     private List<Participant> participants;
 
-    public CoversCounter(List<Participant> participants) {
+    CoversCounter(List<Participant> participants) {
         this.participants = participants;
     }
 
-    public String getResult() {
+    String getResult() {
         return "";
     }
 
-    public int getPescatarianCovers() {
+    int getPescatarianCovers() {
         int nbPescatarian = 0;
         for (Participant participant : this.participants) {
             if (participant.isPescatarian()) {
@@ -31,4 +31,6 @@ class CoversCounter {
         }
         return nbPescatarian;
     }
+
+
 }

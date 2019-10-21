@@ -29,4 +29,8 @@ class Participant {
     DayOfWeek getDepartureDay() {
         return departureDay;
     }
+
+    int calculateNbMeals() {
+        return 4;
+    }
 }
