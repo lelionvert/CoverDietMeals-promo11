@@ -4,6 +4,7 @@ using RegistrationLibrary;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DayOfWeek = RegistrationLibrary.DayOfWeek;
 
 namespace Socrates.Tests.RegistrationLibraryTests
 {

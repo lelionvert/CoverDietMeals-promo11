@@ -5,6 +5,7 @@ using RegistrationLibrary;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DayOfWeek = RegistrationLibrary.DayOfWeek;
 
 namespace Socrates.Tests.CoverDietMealLibraryTests
 {
@@ -47,7 +48,7 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             Participant participant = new Participant(Diet.Pescatarian);
 
             //When
-            int nbCovers = CoverCalculator.GetPescatarianCovers(participant);
+            int nbCovers = CoverCalculator.GetCovers(participant, Diet.Pescatarian);
 
             //Then
             Check.That(nbCovers).IsEqualTo(2);
@@ -63,7 +64,23 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             };
 
             //When
-            int nbCovers = CoverCalculator.GetPescatarianCovers(participants);
+            int nbCovers = CoverCalculator.GetCovers(participants, Diet.Pescatarian);
+
+            //Then
+            Check.That(nbCovers).IsEqualTo(2);
+        }
+
+        [Test]
+        public void OnADay_1_Omnivore_1_Pescatarian_Participants_Return_2_OmnivoreCovers()
+        {
+            //Given
+            var participants = new List<Participant>() {
+                new Participant(Diet.Pescatarian),
+                new Participant()
+            };
+
+            //When
+            int nbCovers = CoverCalculator.GetCovers(participants, Diet.Omnivore);
 
             //Then
             Check.That(nbCovers).IsEqualTo(2);
@@ -88,7 +105,7 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             );
 
             //When
-            int nbCovers = CoverCalculator.GetPescatarianCovers(participant, DayOfWeek.Friday);
+            int nbCovers = CoverCalculator.GetCovers(participant, Diet.Pescatarian, DayOfWeek.Friday);
 
             //Then
             Check.That(nbCovers).IsEqualTo(2);
@@ -113,7 +130,7 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             );
 
             //When
-            int nbCovers = CoverCalculator.GetPescatarianCovers(participant, DayOfWeek.Saturday);
+            int nbCovers = CoverCalculator.GetCovers(participant, Diet.Pescatarian, DayOfWeek.Saturday);
 
             //Then
             Check.That(nbCovers).IsEqualTo(0);
@@ -138,7 +155,7 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             );
 
             //When
-            int nbCovers = CoverCalculator.GetPescatarianCovers(participant, DayOfWeek.Saturday);
+            int nbCovers = CoverCalculator.GetCovers(participant, Diet.Pescatarian, DayOfWeek.Saturday);
 
             //Then
             Check.That(nbCovers).IsEqualTo(2);
@@ -163,10 +180,68 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             );
 
             //When
-            int nbCovers = CoverCalculator.GetPescatarianCovers(participant, DayOfWeek.Thursday);
+            int nbCovers = CoverCalculator.GetCovers(participant, Diet.Pescatarian, DayOfWeek.Thursday);
 
             //Then
             Check.That(nbCovers).IsEqualTo(0);
+        }
+
+        [Test]
+        public void OnAThursday_1_PescatarianParticipant_Return_2_PescatarianCovers()
+        {
+            //Given
+            var reservation = new Reservation(
+                        Choice.Single,
+                        checkin: new CheckTime(
+                            DayOfWeek.Thursday
+                        ),
+                        checkout: new CheckTime(
+                            DayOfWeek.Sunday
+                            )
+                        );
+            var participant = new Participant(
+                Diet.Pescatarian,
+                reservation
+            );
+
+            //When
+            int nbCovers = CoverCalculator.GetCovers(participant, Diet.Pescatarian, DayOfWeek.Thursday);
+
+            //Then
+            Check.That(nbCovers).IsEqualTo(2);
+        }
+
+
+        [Test]
+        public void OnAFriday_1_Pescatarian_1_Omnivore_Return_2_PescatarianCovers()
+        {
+            //Given
+            var reservation = new Reservation(
+                        Choice.Single,
+                        checkin: new CheckTime(
+                            DayOfWeek.Thursday
+                        ),
+                        checkout: new CheckTime(
+                            DayOfWeek.Sunday
+                            )
+                        );
+            var participants = new List<Participant>()
+            {
+                new Participant(
+                    Diet.Pescatarian,
+                    reservation
+                ),
+                new Participant(
+                    Diet.Omnivore,
+                    reservation
+                )
+            };
+
+            //When
+            int nbCovers = CoverCalculator.GetCovers(participants, Diet.Pescatarian, DayOfWeek.Friday);
+
+            //Then
+            Check.That(nbCovers).IsEqualTo(2);
         }
     }
 }

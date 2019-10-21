@@ -2,6 +2,7 @@
 using NFluent;
 using NUnit.Framework;
 using RegistrationLibrary;
+using DayOfWeek = RegistrationLibrary.DayOfWeek;
 
 namespace Socrates.Tests.RegistrationLibraryTests
 {

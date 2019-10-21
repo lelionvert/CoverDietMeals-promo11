@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DayOfWeek = RegistrationLibrary.DayOfWeek;
 
 namespace CoverDietMealLibrary
 {
@@ -10,27 +11,31 @@ namespace CoverDietMealLibrary
         {
             return 2;
         }
+        public static int GetCovers(Participant participant, Diet diet)
+        {
+            return participant.IsDietType(diet) ? 2 : 0;
+        }
 
         public static int GetCovers(List<Participant> participants)
         {
             return 2 * participants.Count;
         }
 
-        public static int GetPescatarianCovers(Participant participant)
+        public static int GetCovers(List<Participant> participants, Diet diet)
         {
-            return participant.Diet == Diet.Pescatarian ? 2 : 0;
+            return 2 * participants.Where(p => p.IsDietType(diet)).Count();
         }
 
-        public static int GetPescatarianCovers(List<Participant> participants)
+        public static int GetCovers(Participant participant, Diet diet, DayOfWeek dayOfWeek)
         {
-            return participants.Where(p => p.Diet == Diet.Pescatarian).Count() * 2;
+            return participant.IsDietType(diet)
+                && participant.IsPresentOn(dayOfWeek) ?
+                2 : 0;
         }
 
-        public static int GetPescatarianCovers(Participant participant, DayOfWeek dayOfWeek)
+        public static int GetCovers(List<Participant> participants, Diet diet, DayOfWeek dayOfWeek)
         {
-            var isPresent = participant.IsPresentOn(dayOfWeek);
-
-            return participant.Diet == Diet.Pescatarian && isPresent ? 2 : 0;
+            return participants.Where(p => p.IsDietType(diet) && p.IsPresentOn(dayOfWeek)).Count() * 2;
         }
     }
 }
