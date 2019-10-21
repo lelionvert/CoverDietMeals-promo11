@@ -5,6 +5,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.DayOfWeek;
+import java.util.Collections;
 
 import static java.util.Arrays.asList;
 
@@ -17,7 +18,7 @@ public class ScenarioTest {
         CoversCounter coversCounter = new CoversCounter();
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers(bruno);
+        int pescatarianCovers = coversCounter.getPescatarianCovers(Collections.singletonList(bruno));
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);
