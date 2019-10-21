@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CoverDietMealLibrary
 {
@@ -18,6 +19,11 @@ namespace CoverDietMealLibrary
         public static int GetPescatarianCovers(Participant participant)
         {
             return participant.Diet == Diet.Pescatarian ? 2 : 0;
+        }
+
+        public static int GetPescatarianCovers(List<Participant> participants)
+        {
+            return participants.Where(p => p.Diet == Diet.Pescatarian).Count() * 2;
         }
     }
 }

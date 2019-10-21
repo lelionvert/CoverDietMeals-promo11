@@ -6,6 +6,7 @@ namespace CoverDietMealLibrary
 {
     public enum Diet
     {
+        Omnivore,
         Pescatarian
     };
 
@@ -17,13 +18,9 @@ namespace CoverDietMealLibrary
             private set;
         }
 
-        public Participant(Diet diet)
+        public Participant(Diet diet = Diet.Omnivore)
         {
             Diet = diet;
-        }
-
-        public Participant()
-        {
         }
     }
 }
