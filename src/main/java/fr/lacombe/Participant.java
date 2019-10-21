@@ -1,15 +1,17 @@
 package fr.lacombe;
 
+import java.time.DayOfWeek;
+
 class Participant {
     private String diet;
-    private String day;
+    private DayOfWeek day;
 
-    Participant(String diet, String day) {
+    Participant(String diet, DayOfWeek day) {
         this.diet = diet;
         this.day = day;
     }
 
-    String getDay() {
+    DayOfWeek getDay() {
         return day;
     }
 
