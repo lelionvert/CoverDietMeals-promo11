@@ -20,7 +20,11 @@ namespace RegistrationLibrary
             get;
             private set;
         }
-        private CheckTime checkout;
+        public CheckTime CheckOut
+        {
+            get;
+            private set;
+        }
 
         public Reservation(Choice choice)
         {
@@ -36,7 +40,7 @@ namespace RegistrationLibrary
         {
             this.Choice = choice;
             this.CheckIn = checkin;
-            this.checkout = checkout;
+            this.CheckOut = checkout;
         }
 
         public Reservation(Choice choice, CheckTime checkin, CheckTime checkout, int missingMeals) : this(choice, checkin, checkout)
