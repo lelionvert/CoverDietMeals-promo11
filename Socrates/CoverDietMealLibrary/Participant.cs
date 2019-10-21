@@ -29,6 +29,8 @@ namespace CoverDietMealLibrary
         
         internal bool IsPresentOn(DayOfWeek dayOfWeek)
         {
+            if (dayOfWeek == DayOfWeek.Saturday)
+                return false;
             return true;
         }
     }
