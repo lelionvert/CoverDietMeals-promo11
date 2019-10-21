@@ -2,11 +2,11 @@ package fr.lacombe;
 
 import java.time.DayOfWeek;
 
-public class Booking {
-    DayOfWeek arrivalDay;
-    DayOfWeek departureDay;
+class Booking {
+    private DayOfWeek arrivalDay;
+    private DayOfWeek departureDay;
 
-    public Booking(DayOfWeek arrivalDay, DayOfWeek departureDay) {
+    Booking(DayOfWeek arrivalDay, DayOfWeek departureDay) {
         this.arrivalDay = arrivalDay;
         this.departureDay = departureDay;
     }
@@ -23,15 +23,15 @@ public class Booking {
         return nbMeals;
     }
 
-    boolean leavesLastDay() {
+    private boolean leavesLastDay() {
         return departureDay == DayOfWeek.SUNDAY;
     }
 
-    boolean arrivesFirstDay() {
+    private boolean arrivesFirstDay() {
         return arrivalDay == DayOfWeek.THURSDAY;
     }
 
-    int calculateStayDuration() {
+    private int calculateStayDuration() {
         return departureDay.getValue() - arrivalDay.getValue() + 1;
     }
 }

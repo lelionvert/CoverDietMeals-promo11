@@ -1,6 +1,5 @@
 package fr.lacombe;
 
-import java.time.DayOfWeek;
 import java.util.List;
 
 class CoversCounter {
@@ -24,6 +23,4 @@ class CoversCounter {
         }
         return nbPescatarian;
     }
-
-
 }
