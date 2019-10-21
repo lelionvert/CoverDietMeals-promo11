@@ -26,7 +26,6 @@ public class ScenarioTest {
 
 
     @Test
-    @Ignore("Work in progress")
     public void number_of_pescatarian_covers_is_two_for_two_participants_one_normal_one_pescatarian_one_day() {
         // Given
         Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY);

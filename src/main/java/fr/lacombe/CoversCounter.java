@@ -8,7 +8,7 @@ class CoversCounter {
     int getPescatarianCovers(List<Participant> participants) {
         int nbPescatarian = 0;
         for (Participant participant : participants) {
-            if (participant.getDiet().equals(DietType.PESCATARIAN)) {
+            if (participant.isPescatarian()) {
                 if (DayOfWeek.FRIDAY.equals(participant.getDay())) {
                     nbPescatarian += 2;
                 } else {
@@ -18,4 +18,5 @@ class CoversCounter {
         }
         return nbPescatarian;
     }
+
 }

@@ -15,7 +15,7 @@ class Participant {
         return day;
     }
 
-    DietType getDiet() {
-        return diet;
+    boolean isPescatarian() {
+        return diet.equals(DietType.PESCATARIAN);
     }
 }
