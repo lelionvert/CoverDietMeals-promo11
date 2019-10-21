@@ -18,22 +18,19 @@ class Participant {
         this.departureDay = departureDay;
     }
 
-    DayOfWeek getArrivalDay() {
-        return arrivalDay;
-    }
-
     boolean isPescatarian() {
         return diet.equals(DietType.PESCATARIAN);
     }
 
-    DayOfWeek getDepartureDay() {
-        return departureDay;
-    }
-
     int calculateNbMeals() {
-        if (departureDay == DayOfWeek.FRIDAY || arrivalDay == DayOfWeek.SATURDAY) {
-            return 2;
+        int nbMeals = (departureDay.getValue() - arrivalDay.getValue() + 1) * 2;
+
+        if(arrivalDay == DayOfWeek.THURSDAY) {
+            nbMeals --;
         }
-        return 4;
+        if(departureDay == DayOfWeek.SUNDAY) {
+            nbMeals --;
+        }
+        return nbMeals;
     }
 }

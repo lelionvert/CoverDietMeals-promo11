@@ -25,4 +25,10 @@ public class ParticipantTest {
         Assertions.assertThat(participant.calculateNbMeals()).isEqualTo(2);
     }
 
+    @Test
+    public void nb_meals_is_five_when_participant_comes_thursday_and_leaves_saturday() {
+        Participant participant = new Participant(DietType.NORMAL, DayOfWeek.THURSDAY, DayOfWeek.SATURDAY);
+        Assertions.assertThat(participant.calculateNbMeals()).isEqualTo(5);
+    }
+
 }

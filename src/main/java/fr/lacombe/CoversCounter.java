@@ -19,14 +19,7 @@ class CoversCounter {
         int nbPescatarian = 0;
         for (Participant participant : this.participants) {
             if (participant.isPescatarian()) {
-                if(DayOfWeek.SATURDAY.equals(participant.getDepartureDay())){
-                    nbPescatarian += 2;
-                }
-                if (DayOfWeek.FRIDAY.equals(participant.getArrivalDay())) {
-                    nbPescatarian += 2;
-                } else {
-                    nbPescatarian += 1;
-                }
+                nbPescatarian += participant.calculateNbMeals();
             }
         }
         return nbPescatarian;

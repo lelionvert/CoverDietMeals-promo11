@@ -14,7 +14,7 @@ public class ScenarioTest {
     @Test
     public void number_of_pescatarian_covers_is_two_for_one_pescatarian_participant_one_day() {
         // Given
-        Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY);
+        Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
         CoversCounter coversCounter = new CoversCounter(Collections.singletonList(bruno));
 
         // When
@@ -28,8 +28,8 @@ public class ScenarioTest {
     @Test
     public void number_of_pescatarian_covers_is_two_for_two_participants_one_normal_one_pescatarian_one_day() {
         // Given
-        Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY);
-        Participant norman = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY);
+        Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
+        Participant norman = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
         CoversCounter coversCounter = new CoversCounter(asList(bruno, norman));
 
         // When
