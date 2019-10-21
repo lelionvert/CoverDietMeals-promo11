@@ -17,7 +17,6 @@ namespace RegistrationLibrary
         }
         private int min;
         private string date;
-        private DayOfWeek friday;
 
         public CheckTime(DayOfWeek dayOfWeek, string time)
         {
@@ -32,12 +31,17 @@ namespace RegistrationLibrary
             this.min = min;
         }
 
-        public CheckTime(string date, DayOfWeek friday, int hour, int min)
+        public CheckTime(string date, DayOfWeek dayOfWeek, int hour, int min)
         {
             this.date = date;
-            this.friday = friday;
+            DayOfWeek = dayOfWeek;
             Hour = hour;
             this.min = min;
+        }
+
+        public CheckTime(DayOfWeek dayOfWeek)
+        {
+            DayOfWeek = dayOfWeek;
         }
     }
 }

@@ -25,5 +25,12 @@ namespace CoverDietMealLibrary
         {
             return participants.Where(p => p.Diet == Diet.Pescatarian).Count() * 2;
         }
+
+        public static int GetPescatarianCovers(Participant participant, DayOfWeek dayOfWeek)
+        {
+            var isPresent = participant.IsPresentOn(dayOfWeek);
+
+            return participant.Diet == Diet.Pescatarian && isPresent ? 2 : 0;
+        }
     }
 }

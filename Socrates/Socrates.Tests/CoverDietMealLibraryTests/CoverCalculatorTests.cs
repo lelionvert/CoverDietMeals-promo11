@@ -68,5 +68,30 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             //Then
             Check.That(nbCovers).IsEqualTo(2);
         }
+
+        [Test]
+        public void OnAFriday_1_PescatarianParticipant_Return_2_PescatarianCovers()
+        {
+            //Given
+            var reservation = new Reservation(
+                        Choice.Single,
+                        checkin: new CheckTime(
+                            DayOfWeek.Thursday
+                        ),
+                        checkout: new CheckTime(
+                            DayOfWeek.Friday
+                            )
+                        );
+            var participant = new Participant(
+                Diet.Pescatarian,
+                reservation
+            );
+
+            //When
+            int nbCovers = CoverCalculator.GetPescatarianCovers(participant, DayOfWeek.Friday);
+
+            //Then
+            Check.That(nbCovers).IsEqualTo(2);
+        }
     }
 }
