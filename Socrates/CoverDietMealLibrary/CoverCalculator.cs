@@ -14,5 +14,10 @@ namespace CoverDietMealLibrary
         {
             return 2 * participants.Count;
         }
+
+        public static int GetPescatarianCovers(Participant participant)
+        {
+            return participant.Diet == Diet.Pescatarian ? 2 : 0;
+        }
     }
 }

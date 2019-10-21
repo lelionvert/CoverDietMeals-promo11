@@ -39,5 +39,18 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             //Then
             Check.That(nbCovers).IsEqualTo(4);
         }
+
+        [Test]
+        public void OnADay_1_PescatarianParticipant_Return_2_PescatarianCovers()
+        {
+            //Given
+            Participant participant = new Participant(Diet.Pescatarian);
+
+            //When
+            int nbCovers = CoverCalculator.GetPescatarianCovers(participant);
+
+            //Then
+            Check.That(nbCovers).IsEqualTo(2);
+        }
     }
 }
