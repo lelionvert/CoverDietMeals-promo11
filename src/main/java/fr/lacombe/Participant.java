@@ -3,10 +3,10 @@ package fr.lacombe;
 import java.time.DayOfWeek;
 
 class Participant {
-    private String diet;
+    private DietType diet;
     private DayOfWeek day;
 
-    Participant(String diet, DayOfWeek day) {
+    Participant(DietType diet, DayOfWeek day) {
         this.diet = diet;
         this.day = day;
     }
@@ -15,7 +15,7 @@ class Participant {
         return day;
     }
 
-    String getDiet() {
+    DietType getDiet() {
         return diet;
     }
 }
