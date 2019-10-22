@@ -10,97 +10,17 @@ import static java.util.Arrays.asList;
 
 public class CoverCalculatorTest {
 
-    @Test
-    public void numbers_of_pescatarians_diet_is_1_for_one_meal_one_participant() {
-        // Given
-        Participant participant = new Participant(DietType.PESCATARIAN, DayOfWeek.THURSDAY,DayOfWeek.THURSDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(Collections.singletonList(participant));
 
-        // When
-        int pescatarianCovers = coverCalculator.pescatarianCovers();
-
-        // Then
-        Assertions.assertThat(pescatarianCovers).isEqualTo(1);
-    }
-
-    @Test
-    public void numbers_of_pescatarians_diet_is_0_for_one_meal_one_normal_diet_participant() {
-        // Given
-        Participant participant = new Participant(DietType.NORMAL, DayOfWeek.THURSDAY, DayOfWeek.THURSDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(Collections.singletonList(participant));
-
-        // When
-        int pescatarianCovers = coverCalculator.pescatarianCovers();
-
-        // Then
-        Assertions.assertThat(pescatarianCovers).isEqualTo(0);
-    }
-
-    @Test
-    public void numbers_of_pescatarians_diet_is_0_for_two_meal_one_participant() {
-        // Given
-        Participant participant = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(Collections.singletonList(participant));
-
-        // When
-        int pescatarianCovers = coverCalculator.pescatarianCovers();
-
-        // Then
-        Assertions.assertThat(pescatarianCovers).isEqualTo(0);
-    }
-
-    @Test
-    public void numbers_of_pescatarians_diet_is_0_for_two_meal_two_participants() {
-        // Given
-        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
-        Participant participant2 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(asList(participant1, participant2));
-
-        // When
-        int pescatarianCovers = coverCalculator.pescatarianCovers();
-
-        // Then
-        Assertions.assertThat(pescatarianCovers).isEqualTo(0);
-    }
-
-    @Test
-    public void numbers_of_pescatarians_diet_is_2_for_two_meals_two_participants() {
-        // Given
-        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
-        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY,DayOfWeek.FRIDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(asList(participant1, participant2));
-
-        // When
-        int pescatarianCovers = coverCalculator.pescatarianCovers();
-
-        // Then
-        Assertions.assertThat(pescatarianCovers).isEqualTo(2);
-    }
-
-    @Test
-    public void numbers_of_pescatarians_diet_is_4_for_two_meals_three_participants() {
-        // Given
-        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
-        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
-        Participant participant3 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(asList(participant1, participant2, participant3));
-
-        // When
-        int pescatarianCovers = coverCalculator.pescatarianCovers();
-
-        // Then
-        Assertions.assertThat(pescatarianCovers).isEqualTo(4);
-    }
+    private static final Participant BRUNO = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+    private static final Participant SOPHIA = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
 
     @Test
     public void numbers_of_pescatarians_diet_is_4_for_two_meals_two_participants_two_days() {
         // Given
-        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(asList(participant1, participant2));
+        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
 
         // When
-        int pescatarianCovers = coverCalculator.pescatarianCovers();
+        int pescatarianCovers = coverCalculator.covers(DietType.PESCATARIAN);
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(4);
@@ -109,9 +29,7 @@ public class CoverCalculatorTest {
     @Test
     public void daily_meal_multiple_diet() {
         // Given
-        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(asList(participant1, participant2));
+        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
 
         // When
         int covers = coverCalculator.covers(DayOfWeek.FRIDAY);
@@ -123,9 +41,7 @@ public class CoverCalculatorTest {
     @Test
     public void event_total_covers() {
         // Given
-        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(asList(participant1, participant2));
+        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
 
         // When
         int covers = coverCalculator.covers();
@@ -135,17 +51,39 @@ public class CoverCalculatorTest {
     }
 
     @Test
-    public void pescatarian_covers_on_friday() {
+    public void covers_on_friday() {
         // Given
-        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(asList(participant1, participant2));
+        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO,SOPHIA));
 
         // When
         int pescatarianCovers = coverCalculator.covers(DayOfWeek.FRIDAY, DietType.PESCATARIAN);
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);
+    }
+
+    @Test
+    public void vegetarian_covers_on_friday_return_0() {
+        // Given
+        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
+
+        // When
+        int pescatarianCovers = coverCalculator.covers(DayOfWeek.FRIDAY, DietType.VEGETARIAN);
+
+        // Then
+        Assertions.assertThat(pescatarianCovers).isEqualTo(0);
+    }
+
+    @Test
+    public void vegetarian_covers_on_friday_return_string() {
+        // Given
+        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
+
+        // When
+        int pescatarianCovers = coverCalculator.covers(DayOfWeek.FRIDAY, DietType.VEGETARIAN);
+
+        // Then
+        Assertions.assertThat(pescatarianCovers).isEqualTo(0);
     }
 
 }

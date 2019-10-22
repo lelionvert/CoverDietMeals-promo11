@@ -31,6 +31,24 @@ class CoverCalculator {
         return nbCover;
     }
 
+    int covers(DietType dietType) {
+        int nbCover = 0;
+        for (Participant participant : this.participants) {
+            if(participant.isDietType(dietType))
+                nbCover += nbMeals(participant);
+        }
+        return nbCover;
+    }
+
+    int covers(DayOfWeek day, DietType dietType) {
+        int nbCover = 0;
+        for (Participant participant : this.participants) {
+            if(participant.isDietType(dietType))
+                nbCover += nbDailyMeals(participant, day);
+        }
+        return nbCover;
+    }
+
     private int nbMeals(Participant participant) {
         int nbMeals = participant.getStayDuration() * 2;
 
@@ -68,12 +86,5 @@ class CoverCalculator {
         return nbPescatarian;
     }
 
-    int covers(DayOfWeek day, DietType dietType) {
-        int nbCover = 0;
-        for (Participant participant : this.participants) {
-            if(participant.isDietType(dietType))
-            nbCover += nbDailyMeals(participant, day);
-        }
-        return nbCover;
-    }
+
 }
