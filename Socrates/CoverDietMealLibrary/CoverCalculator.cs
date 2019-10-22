@@ -33,11 +33,22 @@ namespace CoverDietMealLibrary
 
         public static Dictionary<Diet, int> GetDailyDietMeals(List<Participant> participants, DayOfWeek dayOfWeek)
         {
-            Dictionary<Diet, int> dietMeals = new Dictionary<Diet, int>();
+            var dietMeals = new Dictionary<Diet, int>();
 
             foreach (var diet in Enum.GetValues(typeof(Diet)))
             {
                 dietMeals.Add((Diet)diet, GetCovers(participants, (Diet)diet, dayOfWeek));
+            }
+            return dietMeals;
+        }
+
+        public static Dictionary<DayOfWeek, Dictionary<Diet, int>> GetAllDietMeals(List<Participant> participants)
+        {
+            var dietMeals = new Dictionary<DayOfWeek, Dictionary<Diet, int>>();
+
+            foreach (var day in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                dietMeals.Add((DayOfWeek)day, GetDailyDietMeals(participants, (DayOfWeek)day));
             }
             return dietMeals;
         }

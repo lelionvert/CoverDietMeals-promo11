@@ -207,7 +207,7 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
 
 
         [Test]
-        public void DictionnaryDietMeals()
+        public void DailyDietMeals()
         {
             //Given
             participants.Add(veganParticipant);
@@ -223,6 +223,32 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             Check.That(dailyDietMeals[Diet.Vegan]).IsEqualTo(2);
             Check.That(dailyDietMeals[Diet.Pescatarian]).IsEqualTo(2);
             Check.That(dailyDietMeals[Diet.Omnivore]).IsEqualTo(0);
+        }
+
+
+        [Test]
+        public void AllDietMeals()
+        {
+            //Given
+            participants.Add(veganParticipant);
+            participants.Add(vegetarianParticipant);
+            participants.Add(vegetarianParticipant);
+            participants.Add(pescatarianParticipant);
+
+            //When
+            var dietMeals = CoverCalculator.GetAllDietMeals(participants);
+
+            //Then
+            //On Thursday
+            Check.That(dietMeals[DayOfWeek.Thursday][Diet.Vegetarian]).IsEqualTo(2);
+            Check.That(dietMeals[DayOfWeek.Thursday][Diet.Vegan]).IsEqualTo(1);
+            Check.That(dietMeals[DayOfWeek.Thursday][Diet.Pescatarian]).IsEqualTo(1);
+            Check.That(dietMeals[DayOfWeek.Thursday][Diet.Omnivore]).IsEqualTo(0);
+            //On Friday
+            Check.That(dietMeals[DayOfWeek.Friday][Diet.Vegetarian]).IsEqualTo(4);
+            Check.That(dietMeals[DayOfWeek.Friday][Diet.Vegan]).IsEqualTo(2);
+            Check.That(dietMeals[DayOfWeek.Friday][Diet.Pescatarian]).IsEqualTo(2);
+            Check.That(dietMeals[DayOfWeek.Friday][Diet.Omnivore]).IsEqualTo(0);
         }
     }
 }
