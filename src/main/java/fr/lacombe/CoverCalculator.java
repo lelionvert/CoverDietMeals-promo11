@@ -3,11 +3,11 @@ package fr.lacombe;
 import java.time.DayOfWeek;
 import java.util.List;
 
-class CoversCounter {
+class CoverCalculator {
 
     private List<Participant> participants;
 
-    CoversCounter(List<Participant> participants) {
+    CoverCalculator(List<Participant> participants) {
         this.participants = participants;
     }
 
@@ -15,23 +15,23 @@ class CoversCounter {
         return "";
     }
 
-    int calculateCovers() {
+    int covers() {
         int nbCover = 0;
         for (Participant participant : this.participants) {
-            nbCover += calculateNbMeals(participant);
+            nbCover += nbMeals(participant);
         }
         return nbCover;
     }
 
-    int calculateCovers(DayOfWeek day) {
+    int covers(DayOfWeek day) {
         int nbCover = 0;
         for (Participant participant : this.participants) {
-            nbCover += calculateDailyNbMeals(participant, day);
+            nbCover += nbDailyMeals(participant, day);
         }
         return nbCover;
     }
 
-    private int calculateNbMeals(Participant participant) {
+    private int nbMeals(Participant participant) {
         int nbMeals = participant.getStayDuration() * 2;
 
         if (participant.arrivesFirstDay()) {
@@ -43,7 +43,7 @@ class CoversCounter {
         return nbMeals;
     }
 
-    private int calculateDailyNbMeals(Participant participant, DayOfWeek dayOfWeek) {
+    private int nbDailyMeals(Participant participant, DayOfWeek dayOfWeek) {
         int nbMeals = 0;
         if (participant.isPresent(dayOfWeek)) {
             nbMeals = 2;
@@ -58,21 +58,21 @@ class CoversCounter {
         return nbMeals;
     }
 
-    int calculatePescatarianCovers() {
+    int pescatarianCovers() {
         int nbPescatarian = 0;
         for (Participant participant : this.participants) {
             if (participant.isPescatarian()) {
-                nbPescatarian += calculateNbMeals(participant);
+                nbPescatarian += nbMeals(participant);
             }
         }
         return nbPescatarian;
     }
 
-    int calculateCovers(DayOfWeek day, DietType dietType) {
+    int covers(DayOfWeek day, DietType dietType) {
         int nbCover = 0;
         for (Participant participant : this.participants) {
             if(participant.isDietType(dietType))
-            nbCover += calculateDailyNbMeals(participant, day);
+            nbCover += nbDailyMeals(participant, day);
         }
         return nbCover;
     }

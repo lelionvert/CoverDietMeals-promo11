@@ -15,10 +15,10 @@ public class ScenarioTest {
     public void number_of_pescatarian_covers_is_two_for_one_pescatarian_participant_one_day() {
         // Given
         Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
-        CoversCounter coversCounter = new CoversCounter(Collections.singletonList(bruno));
+        CoverCalculator coverCalculator = new CoverCalculator(Collections.singletonList(bruno));
 
         // When
-        int pescatarianCovers = coversCounter.calculatePescatarianCovers();
+        int pescatarianCovers = coverCalculator.pescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);
@@ -30,10 +30,10 @@ public class ScenarioTest {
         // Given
         Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
         Participant norman = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
-        CoversCounter coversCounter = new CoversCounter(asList(bruno, norman));
+        CoverCalculator coverCalculator = new CoverCalculator(asList(bruno, norman));
 
         // When
-        int pescatarianCovers = coversCounter.calculatePescatarianCovers();
+        int pescatarianCovers = coverCalculator.pescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);
@@ -45,10 +45,10 @@ public class ScenarioTest {
         // Given
         Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
         Participant norman = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        CoversCounter coversCounter = new CoversCounter(asList(bruno, norman));
+        CoverCalculator coverCalculator = new CoverCalculator(asList(bruno, norman));
 
         // When
-        String pescatarianCovers = coversCounter.getResult();
+        String pescatarianCovers = coverCalculator.getResult();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo("2 covers, p, Friday \n 2 covers, p, Saturday");
