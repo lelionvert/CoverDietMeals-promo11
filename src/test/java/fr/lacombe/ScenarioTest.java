@@ -18,7 +18,7 @@ public class ScenarioTest {
         CoverCalculator coverCalculator = new CoverCalculator(Collections.singletonList(bruno));
 
         // When
-        int pescatarianCovers = coverCalculator.pescatarianCovers();
+        int pescatarianCovers = coverCalculator.covers(DayOfWeek.FRIDAY, DietType.PESCATARIAN);
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);
@@ -33,7 +33,7 @@ public class ScenarioTest {
         CoverCalculator coverCalculator = new CoverCalculator(asList(bruno, norman));
 
         // When
-        int pescatarianCovers = coverCalculator.pescatarianCovers();
+        int pescatarianCovers = coverCalculator.covers(DayOfWeek.FRIDAY, DietType.PESCATARIAN);
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);

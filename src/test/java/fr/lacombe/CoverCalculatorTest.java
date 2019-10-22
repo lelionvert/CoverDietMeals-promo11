@@ -1,9 +1,11 @@
 package fr.lacombe;
 
 import org.assertj.core.api.Assertions;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.DayOfWeek;
+import java.util.Collections;
 import java.util.Map;
 
 import static java.util.Arrays.asList;
@@ -86,7 +88,21 @@ public class CoverCalculatorTest {
         Assertions.assertThat(vegetarianCovers).isEqualTo(2);
     }
 
-    /*@Test
+    @Test
+    public void vegan_covers_on_saturday_return_2() {
+        // Given
+        Participant participant = new Participant(DietType.VEGAN, DayOfWeek.THURSDAY, DayOfWeek.SUNDAY);
+        CoverCalculator coverCalculator = new CoverCalculator(Collections.singletonList(participant));
+
+        // When
+        int veganCovers = coverCalculator.covers(DayOfWeek.SATURDAY, DietType.VEGAN);
+
+        // Then
+        Assertions.assertThat(veganCovers).isEqualTo(2);
+    }
+
+    @Test
+    @Ignore
     public void cover_map_details() {
         // Given
         CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
@@ -96,6 +112,6 @@ public class CoverCalculatorTest {
 
         // Then
         Assertions.assertThat(coverDetails).isEqualTo(0);
-    }*/
+    }
 
 }

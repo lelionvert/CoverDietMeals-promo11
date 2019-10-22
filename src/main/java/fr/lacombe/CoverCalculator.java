@@ -72,16 +72,6 @@ class CoverCalculator {
         return 0;
     }
 
-    int pescatarianCovers() {
-        int nbPescatarian = 0;
-        for (Participant participant : this.participants) {
-            if (participant.isPescatarian()) {
-                nbPescatarian += nbMeals(participant);
-            }
-        }
-        return nbPescatarian;
-    }
-
     Map<DietType, Integer> coverDetails() {
         return null;
     }
