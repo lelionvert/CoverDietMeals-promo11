@@ -15,6 +15,7 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
         private Reservation fullReservation;
         private Participant pescatarianParticipant;
         private Participant omnivoreParticipant;
+        private Participant veganParticipant;
         private List<Participant> participants;
 
         [OneTimeSetUp]
@@ -38,6 +39,10 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
                 Diet.Omnivore,
                 fullReservation
             );
+            veganParticipant = new Participant(
+                Diet.Vegan, 
+                fullReservation
+                );
         }
 
         [SetUp]
@@ -170,11 +175,27 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
         public void OnAFriday_1_VeganParticipant_Return_2_VeganCovers()
         {
             //Given
-            var veganParticipant = new Participant(Diet.Vegan, fullReservation);
             participants.Add(veganParticipant);
 
             //When
             int nbCovers = CoverCalculator.GetCovers(participants, Diet.Vegan, DayOfWeek.Friday);
+
+            //Then
+            Check.That(nbCovers).IsEqualTo(2);
+        }
+
+        [Test]
+        public void OnAFriday_1_VegetarianParticipant_Return_2_VegetarianCovers()
+        {
+            //Given
+            var vegetarianParticipant = new Participant(Diet.Vegetarian, fullReservation);
+
+            participants.Add(veganParticipant);
+            participants.Add(vegetarianParticipant);
+            participants.Add(pescatarianParticipant);
+
+            //When
+            int nbCovers = CoverCalculator.GetCovers(participants, Diet.Vegetarian, DayOfWeek.Friday);
 
             //Then
             Check.That(nbCovers).IsEqualTo(2);

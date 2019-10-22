@@ -10,7 +10,8 @@ namespace CoverDietMealLibrary
     {
         Omnivore,
         Pescatarian,
-        Vegan
+        Vegan,
+        Vegetarian
     };
 
     public class Participant
