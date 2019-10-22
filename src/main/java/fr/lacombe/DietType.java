@@ -1,5 +1,5 @@
 package fr.lacombe;
 
 public enum DietType {
-    NORMAL, PESCATARIAN
+    NORMAL, PESCATARIAN, VEGAN, VEGETARIAN
 }
