@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 class CoverCalculator {
 
@@ -13,8 +14,26 @@ class CoverCalculator {
         this.participants = participants;
     }
 
-    String getResult() {
-        return "";
+    String displayResult() {
+
+        StringBuilder result = new StringBuilder();
+        for (DayOfWeek dayOfWeek: DayOfWeek.values()) {
+            if (dayOfWeek.getValue() >= DayOfWeek.THURSDAY.getValue()
+            && dayOfWeek.getValue() <= DayOfWeek.SUNDAY.getValue()) {
+                result.append(dayOfWeek.toString()).append(": ");
+                Map<DietType, Integer> coverDetails = coverDetails(dayOfWeek);
+                for (DietType dietType : coverDetails.keySet()) {
+                    result.append(coverDetails.get(dietType))
+                            .append(" ")
+                            .append(dietType)
+                            .append(" | ");
+                }
+                result.append("\n");
+            }
+
+        }
+
+        return result.toString();
     }
 
     int covers() {
@@ -74,10 +93,11 @@ class CoverCalculator {
     }
 
     Map<DietType, Integer> coverDetails(DayOfWeek day) {
-        Map<DietType, Integer> coversByDiet = new HashMap<>();
+        Map<DietType, Integer> coversByDiet = new TreeMap<>();
         for (DietType dietType : DietType.values()) {
             coversByDiet.put(dietType, covers(day, dietType));
         }
         return coversByDiet;
     }
+
 }
