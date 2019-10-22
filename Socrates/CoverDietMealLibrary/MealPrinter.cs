@@ -21,5 +21,10 @@ namespace CoverDietMealLibrary
             }
             return stringBuilder.ToString();
         }
+
+        public static void ConsolePrint(Dictionary<RegistrationLibrary.DayOfWeek, Dictionary<Diet, int>> dietMeals)
+        {
+            Console.WriteLine(Print(dietMeals));
+        }
     }
 }
