@@ -7,13 +7,6 @@ namespace CoverDietMealLibrary
 {
     public class CoverCalculator
     {
-        public static int GetCovers(Participant participant, Diet diet, DayOfWeek dayOfWeek)
-        {
-            return participant.IsDietType(diet)
-                && participant.IsPresentOn(dayOfWeek) ?
-                DayCovers(dayOfWeek) : 0;
-        }
-
         public static int GetCovers(List<Participant> participants, Diet diet, DayOfWeek dayOfWeek)
         {
             return participants.Where(

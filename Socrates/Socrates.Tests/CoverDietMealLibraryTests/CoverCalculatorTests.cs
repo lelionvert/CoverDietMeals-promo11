@@ -165,5 +165,19 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             //Then
             Check.That(nbCovers).IsEqualTo(1);
         }
+
+        [Test]
+        public void OnAFriday_1_VeganParticipant_Return_2_VeganCovers()
+        {
+            //Given
+            var veganParticipant = new Participant(Diet.Vegan, fullReservation);
+            participants.Add(veganParticipant);
+
+            //When
+            int nbCovers = CoverCalculator.GetCovers(participants, Diet.Vegan, DayOfWeek.Friday);
+
+            //Then
+            Check.That(nbCovers).IsEqualTo(2);
+        }
     }
 }

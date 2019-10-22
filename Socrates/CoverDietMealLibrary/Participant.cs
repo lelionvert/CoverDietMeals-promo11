@@ -9,7 +9,8 @@ namespace CoverDietMealLibrary
     public enum Diet
     {
         Omnivore,
-        Pescatarian
+        Pescatarian,
+        Vegan
     };
 
     public class Participant
