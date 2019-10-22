@@ -116,4 +116,21 @@ public class CoverCalculatorTest {
             Assertions.assertThat(coverDetails.get(dietType)).isEqualTo(2);
         }
     }
+
+
+    @Test
+    public void display_result_return_formatted_string() {
+        // Given
+        CoverCalculator coverCalculator = new CoverCalculator(asList(OMNIVORE_PARTICIPANT, PESCATARIAN_PARTICIPANT, VEGAN_PARTICIPANT,
+                VEGETARIAN_PARTICIPANT));
+
+        // When
+        String pescatarianCovers = coverCalculator.displayResult();
+
+        // Then
+        Assertions.assertThat(pescatarianCovers).isEqualTo("THURSDAY: 0 OMNIVORE | 1 VEGAN | 1 VEGETARIAN | 0 PESCATARIAN | \n" +
+                "FRIDAY: 2 OMNIVORE | 2 VEGAN | 2 VEGETARIAN | 2 PESCATARIAN | \n" +
+                "SATURDAY: 2 OMNIVORE | 2 VEGAN | 2 VEGETARIAN | 2 PESCATARIAN | \n" +
+                "SUNDAY: 0 OMNIVORE | 1 VEGAN | 1 VEGETARIAN | 0 PESCATARIAN | \n");
+    }
 }

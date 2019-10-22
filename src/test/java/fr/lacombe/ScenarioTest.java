@@ -41,20 +41,21 @@ public class ScenarioTest {
     @Test
     public void display_result_return_formatted_string() {
         // Given
-        Participant OMNIVORE_PARTICIPANT = new Participant(DietType.OMNIVORE, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        Participant PESCATARIAN_PARTICIPANT = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        Participant VEGAN_PARTICIPANT = new Participant(DietType.VEGAN, DayOfWeek.THURSDAY, DayOfWeek.SUNDAY);
-        Participant VEGETARIAN_PARTICIPANT = new Participant(DietType.VEGETARIAN, DayOfWeek.THURSDAY, DayOfWeek.SUNDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(asList(OMNIVORE_PARTICIPANT, PESCATARIAN_PARTICIPANT, VEGAN_PARTICIPANT,
-                VEGETARIAN_PARTICIPANT));
+        Participant omnivoreParticipant = new Participant(DietType.OMNIVORE, DayOfWeek.FRIDAY, DayOfWeek.SUNDAY);
+        Participant vegetarianParticipant1 = new Participant(DietType.VEGETARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        Participant veganParticipant = new Participant(DietType.VEGAN, DayOfWeek.THURSDAY, DayOfWeek.SUNDAY);
+        Participant vegetarianParticipant2 = new Participant(DietType.VEGETARIAN, DayOfWeek.FRIDAY, DayOfWeek.SUNDAY);
+
+        CoverCalculator coverCalculator = new CoverCalculator(asList(omnivoreParticipant, vegetarianParticipant1, veganParticipant,
+                vegetarianParticipant2));
 
         // When
         String pescatarianCovers = coverCalculator.displayResult();
 
         // Then
-        Assertions.assertThat(pescatarianCovers).isEqualTo("THURSDAY: 0 OMNIVORE | 1 VEGAN | 1 VEGETARIAN | 0 PESCATARIAN | \n" +
-                "FRIDAY: 2 OMNIVORE | 2 VEGAN | 2 VEGETARIAN | 2 PESCATARIAN | \n" +
-                "SATURDAY: 2 OMNIVORE | 2 VEGAN | 2 VEGETARIAN | 2 PESCATARIAN | \n" +
-                "SUNDAY: 0 OMNIVORE | 1 VEGAN | 1 VEGETARIAN | 0 PESCATARIAN | \n");
+        Assertions.assertThat(pescatarianCovers).isEqualTo("THURSDAY: 0 OMNIVORE | 1 VEGAN | 0 VEGETARIAN | 0 PESCATARIAN | \n" +
+                "FRIDAY: 2 OMNIVORE | 2 VEGAN | 4 VEGETARIAN | 0 PESCATARIAN | \n" +
+                "SATURDAY: 2 OMNIVORE | 2 VEGAN | 4 VEGETARIAN | 0 PESCATARIAN | \n" +
+                "SUNDAY: 1 OMNIVORE | 1 VEGAN | 1 VEGETARIAN | 0 PESCATARIAN | \n");
     }
 }
