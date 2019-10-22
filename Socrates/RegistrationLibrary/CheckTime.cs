@@ -4,10 +4,10 @@ namespace RegistrationLibrary
 {
     public enum DayOfWeek
     {
-        Monday = 0,
-        Tuesday,
-        Wednesday,
-        Thursday,
+        //Monday = 0,
+        //Tuesday,
+        //Wednesday,
+        Thursday = 0,
         Friday,
         Saturday,
         Sunday

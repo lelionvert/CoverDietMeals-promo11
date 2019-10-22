@@ -250,5 +250,25 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
             Check.That(dietMeals[DayOfWeek.Friday][Diet.Pescatarian]).IsEqualTo(2);
             Check.That(dietMeals[DayOfWeek.Friday][Diet.Omnivore]).IsEqualTo(0);
         }
+
+        [Test]
+        public void PrintMealsPlanning()
+        {
+            //Given
+            var dietMeals = CoverCalculator.GetAllDietMeals(participants);
+
+            //When
+            var resume = MealPrinter.Print(dietMeals);
+
+            //Then
+            Check.That(resume).IsEqualTo(
+                new StringBuilder()
+                .AppendLine("Thursday:[Omnivore, 0][Pescatarian, 0][Vegan, 0][Vegetarian, 0]")
+                .AppendLine("Friday:[Omnivore, 0][Pescatarian, 0][Vegan, 0][Vegetarian, 0]")
+                .AppendLine("Saturday:[Omnivore, 0][Pescatarian, 0][Vegan, 0][Vegetarian, 0]")
+                .AppendLine("Sunday:[Omnivore, 0][Pescatarian, 0][Vegan, 0][Vegetarian, 0]")
+                .ToString()
+            );
+        }
     }
 }
