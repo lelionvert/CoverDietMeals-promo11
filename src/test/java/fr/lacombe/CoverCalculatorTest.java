@@ -1,7 +1,6 @@
 package fr.lacombe;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.DayOfWeek;
@@ -109,7 +108,7 @@ public class CoverCalculatorTest {
                         VEGETARIAN_PARTICIPANT));
 
         // When
-        Map<DietType, Integer> coverDetails = coverCalculator.coverDetails(DayOfWeek.SATURDAY);
+        Map<DietType, Integer> coverDetails = coverCalculator.coversByDietForGivenDay(DayOfWeek.SATURDAY);
 
         // Then
         for (DietType dietType : coverDetails.keySet()) {

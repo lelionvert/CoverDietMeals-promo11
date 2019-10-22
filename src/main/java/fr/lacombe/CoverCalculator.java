@@ -1,7 +1,7 @@
 package fr.lacombe;
 
 import java.time.DayOfWeek;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -17,23 +17,26 @@ class CoverCalculator {
     String displayResult() {
 
         StringBuilder result = new StringBuilder();
-        for (DayOfWeek dayOfWeek: DayOfWeek.values()) {
-            if (dayOfWeek.getValue() >= DayOfWeek.THURSDAY.getValue()
-            && dayOfWeek.getValue() <= DayOfWeek.SUNDAY.getValue()) {
-                result.append(dayOfWeek.toString()).append(": ");
-                Map<DietType, Integer> coverDetails = coverDetails(dayOfWeek);
-                for (DietType dietType : coverDetails.keySet()) {
-                    result.append(coverDetails.get(dietType))
-                            .append(" ")
-                            .append(dietType)
-                            .append(" | ");
-                }
-                result.append("\n");
-            }
 
-        }
-
+        Arrays.stream(DayOfWeek.values())
+                .filter(this::isConferenceDay)
+                .forEach(dayOfWeek -> {
+                    Map<DietType, Integer> coverDetails = coversByDietForGivenDay(dayOfWeek);
+                    result.append(dayOfWeek.toString()).append(": ");
+                    coverDetails.keySet().forEach(
+                            dietType -> result.append(coverDetails.get(dietType))
+                                    .append(" ")
+                                    .append(dietType)
+                                    .append(" | ")
+                    );
+                    result.append("\n");
+                });
         return result.toString();
+    }
+
+    private boolean isConferenceDay(DayOfWeek dayOfWeek) {
+        return dayOfWeek.getValue() >= DayOfWeek.THURSDAY.getValue()
+                && dayOfWeek.getValue() <= DayOfWeek.SUNDAY.getValue();
     }
 
     int covers() {
@@ -55,7 +58,7 @@ class CoverCalculator {
     int covers(DietType dietType) {
         int nbCover = 0;
         for (Participant participant : this.participants) {
-            if(participant.isDietType(dietType))
+            if (participant.isDietType(dietType))
                 nbCover += nbMeals(participant);
         }
         return nbCover;
@@ -64,7 +67,7 @@ class CoverCalculator {
     int covers(DayOfWeek day, DietType dietType) {
         int nbCover = 0;
         for (Participant participant : this.participants) {
-            if(participant.isDietType(dietType))
+            if (participant.isDietType(dietType))
                 nbCover += nbMealsForGivenDay(participant, day);
         }
         return nbCover;
@@ -92,12 +95,11 @@ class CoverCalculator {
         return 0;
     }
 
-    Map<DietType, Integer> coverDetails(DayOfWeek day) {
+    Map<DietType, Integer> coversByDietForGivenDay(DayOfWeek day) {
         Map<DietType, Integer> coversByDiet = new TreeMap<>();
         for (DietType dietType : DietType.values()) {
             coversByDiet.put(dietType, covers(day, dietType));
         }
         return coversByDiet;
     }
-
 }
