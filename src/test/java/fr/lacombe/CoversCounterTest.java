@@ -121,6 +121,20 @@ public class CoversCounterTest {
     }
 
     @Test
+    public void event_total_covers() {
+        // Given
+        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        CoversCounter coversCounter = new CoversCounter(asList(participant1, participant2));
+
+        // When
+        int covers = coversCounter.getCovers();
+
+        // Then
+        Assertions.assertThat(covers).isEqualTo(8);
+    }
+
+    @Test
     public void pescatarian_daily_meal() {
         // Given
         Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
