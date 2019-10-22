@@ -17,7 +17,7 @@ public class CoversCounterTest {
         CoversCounter coversCounter = new CoversCounter(Collections.singletonList(participant));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers();
+        int pescatarianCovers = coversCounter.calculatePescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(1);
@@ -30,7 +30,7 @@ public class CoversCounterTest {
         CoversCounter coversCounter = new CoversCounter(Collections.singletonList(participant));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers();
+        int pescatarianCovers = coversCounter.calculatePescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(0);
@@ -43,7 +43,7 @@ public class CoversCounterTest {
         CoversCounter coversCounter = new CoversCounter(Collections.singletonList(participant));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers();
+        int pescatarianCovers = coversCounter.calculatePescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(0);
@@ -57,7 +57,7 @@ public class CoversCounterTest {
         CoversCounter coversCounter = new CoversCounter(asList(participant1, participant2));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers();
+        int pescatarianCovers = coversCounter.calculatePescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(0);
@@ -71,7 +71,7 @@ public class CoversCounterTest {
         CoversCounter coversCounter = new CoversCounter(asList(participant1, participant2));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers();
+        int pescatarianCovers = coversCounter.calculatePescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);
@@ -86,7 +86,7 @@ public class CoversCounterTest {
         CoversCounter coversCounter = new CoversCounter(asList(participant1, participant2, participant3));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers();
+        int pescatarianCovers = coversCounter.calculatePescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(4);
@@ -100,7 +100,7 @@ public class CoversCounterTest {
         CoversCounter coversCounter = new CoversCounter(asList(participant1, participant2));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers();
+        int pescatarianCovers = coversCounter.calculatePescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(4);
@@ -114,7 +114,7 @@ public class CoversCounterTest {
         CoversCounter coversCounter = new CoversCounter(asList(participant1, participant2));
 
         // When
-        int covers = coversCounter.getCovers(DayOfWeek.FRIDAY);
+        int covers = coversCounter.calculateCovers(DayOfWeek.FRIDAY);
 
         // Then
         Assertions.assertThat(covers).isEqualTo(4);
@@ -128,21 +128,21 @@ public class CoversCounterTest {
         CoversCounter coversCounter = new CoversCounter(asList(participant1, participant2));
 
         // When
-        int covers = coversCounter.getCovers();
+        int covers = coversCounter.calculateCovers();
 
         // Then
         Assertions.assertThat(covers).isEqualTo(8);
     }
 
     @Test
-    public void pescatarian_daily_meal() {
+    public void pescatarian_covers_on_friday() {
         // Given
         Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
         Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
         CoversCounter coversCounter = new CoversCounter(asList(participant1, participant2));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers(DayOfWeek.FRIDAY);
+        int pescatarianCovers = coversCounter.calculateCovers(DayOfWeek.FRIDAY, DietType.PESCATARIAN);
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);

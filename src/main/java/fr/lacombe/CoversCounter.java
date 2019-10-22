@@ -15,25 +15,15 @@ class CoversCounter {
         return "";
     }
 
-    int getPescatarianCovers() {
-        int nbPescatarian = 0;
+    int calculateCovers() {
+        int nbCover = 0;
         for (Participant participant : this.participants) {
-            if (participant.isPescatarian()) {
-                nbPescatarian += calculateNbMeals(participant);
-            }
+            nbCover += calculateNbMeals(participant);
         }
-        return nbPescatarian;
+        return nbCover;
     }
 
-    int getCovers() {
-        int nbPescatarian = 0;
-        for (Participant participant : this.participants) {
-            nbPescatarian += calculateNbMeals(participant);
-        }
-        return nbPescatarian;
-    }
-
-    int getCovers(DayOfWeek day) {
+    int calculateCovers(DayOfWeek day) {
         int nbCover = 0;
         for (Participant participant : this.participants) {
             nbCover += calculateDailyNbMeals(participant, day);
@@ -68,7 +58,22 @@ class CoversCounter {
         return nbMeals;
     }
 
-    public int getPescatarianCovers(DayOfWeek dayOfWeek) {
-        return 2;
+    int calculatePescatarianCovers() {
+        int nbPescatarian = 0;
+        for (Participant participant : this.participants) {
+            if (participant.isPescatarian()) {
+                nbPescatarian += calculateNbMeals(participant);
+            }
+        }
+        return nbPescatarian;
+    }
+
+    int calculateCovers(DayOfWeek day, DietType dietType) {
+        int nbCover = 0;
+        for (Participant participant : this.participants) {
+            if(participant.isDietType(dietType))
+            nbCover += calculateDailyNbMeals(participant, day);
+        }
+        return nbCover;
     }
 }

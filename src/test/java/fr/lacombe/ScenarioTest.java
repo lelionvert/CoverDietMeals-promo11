@@ -18,7 +18,7 @@ public class ScenarioTest {
         CoversCounter coversCounter = new CoversCounter(Collections.singletonList(bruno));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers();
+        int pescatarianCovers = coversCounter.calculatePescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);
@@ -33,7 +33,7 @@ public class ScenarioTest {
         CoversCounter coversCounter = new CoversCounter(asList(bruno, norman));
 
         // When
-        int pescatarianCovers = coversCounter.getPescatarianCovers();
+        int pescatarianCovers = coversCounter.calculatePescatarianCovers();
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(2);

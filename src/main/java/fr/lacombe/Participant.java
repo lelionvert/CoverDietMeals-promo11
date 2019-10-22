@@ -34,4 +34,8 @@ class Participant {
     boolean isPresent(DayOfWeek day){
         return day.getValue() >= arrivalDay.getValue() && day.getValue() <= departureDay.getValue();
     }
+
+    boolean isDietType(DietType dietType) {
+        return dietType == diet;
+    }
 }
