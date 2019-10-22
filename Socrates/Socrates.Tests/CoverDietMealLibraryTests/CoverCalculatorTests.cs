@@ -270,5 +270,29 @@ namespace Socrates.Tests.CoverDietMealLibraryTests
                 .ToString()
             );
         }
+
+        [Test]
+        public void PrintParticipantsMealsPlanning()
+        {
+            //Given
+            participants.Add(veganParticipant);
+            participants.Add(vegetarianParticipant);
+            participants.Add(vegetarianParticipant);
+            participants.Add(pescatarianParticipant);
+            var dietMeals = CoverCalculator.GetAllDietMeals(participants);
+
+            //When
+            var resume = MealPrinter.Print(dietMeals);
+
+            //Then
+            Check.That(resume).IsEqualTo(
+                new StringBuilder()
+                .AppendLine("Thursday:[Omnivore, 0][Pescatarian, 1][Vegan, 1][Vegetarian, 2]")
+                .AppendLine("Friday:[Omnivore, 0][Pescatarian, 2][Vegan, 2][Vegetarian, 4]")
+                .AppendLine("Saturday:[Omnivore, 0][Pescatarian, 2][Vegan, 2][Vegetarian, 4]")
+                .AppendLine("Sunday:[Omnivore, 0][Pescatarian, 1][Vegan, 1][Vegetarian, 2]")
+                .ToString()
+            );
+        }
     }
 }
