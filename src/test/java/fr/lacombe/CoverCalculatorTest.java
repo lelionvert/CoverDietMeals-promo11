@@ -12,13 +12,15 @@ import static java.util.Arrays.asList;
 
 public class CoverCalculatorTest {
 
-    private static final Participant BRUNO = new Participant(DietType.OMNIVORE, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-    private static final Participant SOPHIA = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+    private static final Participant OMNIVORE_PARTICIPANT = new Participant(DietType.OMNIVORE, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+    private static final Participant PESCATARIAN_PARTICIPANT = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+    private static final Participant VEGAN_PARTICIPANT = new Participant(DietType.VEGAN, DayOfWeek.THURSDAY, DayOfWeek.SUNDAY);
+    private static final Participant VEGETARIAN_PARTICIPANT = new Participant(DietType.VEGETARIAN, DayOfWeek.THURSDAY, DayOfWeek.SUNDAY);
 
     @Test
     public void numbers_of_pescatarians_diet_is_4_for_two_meals_two_participants_two_days() {
         // Given
-        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
+        CoverCalculator coverCalculator = new CoverCalculator(asList(OMNIVORE_PARTICIPANT, PESCATARIAN_PARTICIPANT));
 
         // When
         int pescatarianCovers = coverCalculator.covers(DietType.PESCATARIAN);
@@ -30,7 +32,7 @@ public class CoverCalculatorTest {
     @Test
     public void daily_meal_multiple_diet() {
         // Given
-        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
+        CoverCalculator coverCalculator = new CoverCalculator(asList(OMNIVORE_PARTICIPANT, PESCATARIAN_PARTICIPANT));
 
         // When
         int covers = coverCalculator.covers(DayOfWeek.FRIDAY);
@@ -42,7 +44,7 @@ public class CoverCalculatorTest {
     @Test
     public void event_total_covers() {
         // Given
-        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
+        CoverCalculator coverCalculator = new CoverCalculator(asList(OMNIVORE_PARTICIPANT, PESCATARIAN_PARTICIPANT));
 
         // When
         int covers = coverCalculator.covers();
@@ -54,7 +56,7 @@ public class CoverCalculatorTest {
     @Test
     public void covers_on_friday() {
         // Given
-        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO,SOPHIA));
+        CoverCalculator coverCalculator = new CoverCalculator(asList(OMNIVORE_PARTICIPANT, PESCATARIAN_PARTICIPANT));
 
         // When
         int pescatarianCovers = coverCalculator.covers(DayOfWeek.FRIDAY, DietType.PESCATARIAN);
@@ -66,7 +68,7 @@ public class CoverCalculatorTest {
     @Test
     public void vegetarian_covers_on_friday_return_0() {
         // Given
-        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
+        CoverCalculator coverCalculator = new CoverCalculator(asList(OMNIVORE_PARTICIPANT, PESCATARIAN_PARTICIPANT));
 
         // When
         int pescatarianCovers = coverCalculator.covers(DayOfWeek.FRIDAY, DietType.VEGETARIAN);
@@ -78,8 +80,7 @@ public class CoverCalculatorTest {
     @Test
     public void vegetarian_covers_on_friday_return_2() {
         // Given
-        Participant participant = new Participant(DietType.VEGETARIAN, DayOfWeek.THURSDAY, DayOfWeek.SUNDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(asList(participant));
+        CoverCalculator coverCalculator = new CoverCalculator(Collections.singletonList(VEGETARIAN_PARTICIPANT));
 
         // When
         int vegetarianCovers = coverCalculator.covers(DayOfWeek.FRIDAY, DietType.VEGETARIAN);
@@ -91,8 +92,7 @@ public class CoverCalculatorTest {
     @Test
     public void vegan_covers_on_saturday_return_2() {
         // Given
-        Participant participant = new Participant(DietType.VEGAN, DayOfWeek.THURSDAY, DayOfWeek.SUNDAY);
-        CoverCalculator coverCalculator = new CoverCalculator(Collections.singletonList(participant));
+        CoverCalculator coverCalculator = new CoverCalculator(Collections.singletonList(VEGAN_PARTICIPANT));
 
         // When
         int veganCovers = coverCalculator.covers(DayOfWeek.SATURDAY, DietType.VEGAN);
@@ -102,16 +102,18 @@ public class CoverCalculatorTest {
     }
 
     @Test
-    @Ignore
     public void cover_map_details() {
         // Given
-        CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
+        CoverCalculator coverCalculator = new CoverCalculator(
+                asList(OMNIVORE_PARTICIPANT, PESCATARIAN_PARTICIPANT, VEGAN_PARTICIPANT,
+                        VEGETARIAN_PARTICIPANT));
 
         // When
-        Map<DietType, Integer> coverDetails = coverCalculator.coverDetails();
+        Map<DietType, Integer> coverDetails = coverCalculator.coverDetails(DayOfWeek.SATURDAY);
 
         // Then
-        Assertions.assertThat(coverDetails).isEqualTo(0);
+        for (DietType dietType : coverDetails.keySet()) {
+            Assertions.assertThat(coverDetails.get(dietType)).isEqualTo(2);
+        }
     }
-
 }

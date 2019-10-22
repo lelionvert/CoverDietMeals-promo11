@@ -1,6 +1,7 @@
 package fr.lacombe;
 
 import java.time.DayOfWeek;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +73,11 @@ class CoverCalculator {
         return 0;
     }
 
-    Map<DietType, Integer> coverDetails() {
-        return null;
+    Map<DietType, Integer> coverDetails(DayOfWeek day) {
+        Map<DietType, Integer> coversByDiet = new HashMap<>();
+        for (DietType dietType : DietType.values()) {
+            coversByDiet.put(dietType, covers(day, dietType));
+        }
+        return coversByDiet;
     }
 }
