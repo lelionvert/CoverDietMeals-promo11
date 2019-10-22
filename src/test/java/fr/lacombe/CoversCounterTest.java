@@ -1,7 +1,6 @@
 package fr.lacombe;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.DayOfWeek;
@@ -105,6 +104,34 @@ public class CoversCounterTest {
 
         // Then
         Assertions.assertThat(pescatarianCovers).isEqualTo(4);
+    }
+
+    @Test
+    public void daily_meal_multiple_diet() {
+        // Given
+        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        CoversCounter coversCounter = new CoversCounter(asList(participant1, participant2));
+
+        // When
+        int covers = coversCounter.getCovers(DayOfWeek.FRIDAY);
+
+        // Then
+        Assertions.assertThat(covers).isEqualTo(4);
+    }
+
+    @Test
+    public void pescatarian_daily_meal() {
+        // Given
+        Participant participant1 = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        Participant participant2 = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        CoversCounter coversCounter = new CoversCounter(asList(participant1, participant2));
+
+        // When
+        int pescatarianCovers = coversCounter.getPescatarianCovers(DayOfWeek.FRIDAY);
+
+        // Then
+        Assertions.assertThat(pescatarianCovers).isEqualTo(2);
     }
 
 }

@@ -11,27 +11,15 @@ class Booking {
         this.departureDay = departureDay;
     }
 
-    int calculateNbMeals() {
-        int nbMeals = calculateStayDuration() * 2;
-
-        if (arrivesFirstDay()) {
-            nbMeals--;
-        }
-        if (leavesLastDay()) {
-            nbMeals--;
-        }
-        return nbMeals;
-    }
-
-    private boolean leavesLastDay() {
+    boolean leavesLastDay() {
         return departureDay == DayOfWeek.SUNDAY;
-    }
+}
 
-    private boolean arrivesFirstDay() {
+    boolean arrivesFirstDay() {
         return arrivalDay == DayOfWeek.THURSDAY;
     }
 
-    private int calculateStayDuration() {
+    int calculateStayDuration() {
         return departureDay.getValue() - arrivalDay.getValue() + 1;
     }
 }
