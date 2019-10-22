@@ -29,7 +29,7 @@ public class ScenarioTest {
     public void number_of_pescatarian_covers_is_two_for_two_participants_one_normal_one_pescatarian_one_day() {
         // Given
         Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
-        Participant norman = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
+        Participant norman = new Participant(DietType.OMNIVORE, DayOfWeek.FRIDAY, DayOfWeek.FRIDAY);
         CoverCalculator coverCalculator = new CoverCalculator(asList(bruno, norman));
 
         // When
@@ -44,7 +44,7 @@ public class ScenarioTest {
     public void number_of_pescatarian_covers_is_two_for_two_participants_one_normal_one_pescatarian_two_days() {
         // Given
         Participant bruno = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
-        Participant norman = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+        Participant norman = new Participant(DietType.OMNIVORE, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
         CoverCalculator coverCalculator = new CoverCalculator(asList(bruno, norman));
 
         // When

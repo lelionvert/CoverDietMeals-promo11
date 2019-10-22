@@ -2,6 +2,7 @@ package fr.lacombe;
 
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Map;
 
 class CoverCalculator {
 
@@ -26,7 +27,7 @@ class CoverCalculator {
     int covers(DayOfWeek day) {
         int nbCover = 0;
         for (Participant participant : this.participants) {
-            nbCover += nbDailyMeals(participant, day);
+            nbCover += nbMealsForGivenDay(participant, day);
         }
         return nbCover;
     }
@@ -44,7 +45,7 @@ class CoverCalculator {
         int nbCover = 0;
         for (Participant participant : this.participants) {
             if(participant.isDietType(dietType))
-                nbCover += nbDailyMeals(participant, day);
+                nbCover += nbMealsForGivenDay(participant, day);
         }
         return nbCover;
     }
@@ -61,19 +62,14 @@ class CoverCalculator {
         return nbMeals;
     }
 
-    private int nbDailyMeals(Participant participant, DayOfWeek dayOfWeek) {
-        int nbMeals = 0;
+    private int nbMealsForGivenDay(Participant participant, DayOfWeek dayOfWeek) {
         if (participant.isPresent(dayOfWeek)) {
-            nbMeals = 2;
-
-            if (participant.arrivesFirstDay()) {
-                nbMeals--;
+            if (DayOfWeek.THURSDAY == dayOfWeek || DayOfWeek.SUNDAY == dayOfWeek) {
+                return 1;
             }
-            if (participant.leavesLastDay()) {
-                nbMeals--;
-            }
+            return 2;
         }
-        return nbMeals;
+        return 0;
     }
 
     int pescatarianCovers() {
@@ -86,5 +82,7 @@ class CoverCalculator {
         return nbPescatarian;
     }
 
-
+    Map<DietType, Integer> coverDetails() {
+        return null;
+    }
 }

@@ -4,14 +4,13 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.time.DayOfWeek;
-import java.util.Collections;
+import java.util.Map;
 
 import static java.util.Arrays.asList;
 
 public class CoverCalculatorTest {
 
-
-    private static final Participant BRUNO = new Participant(DietType.NORMAL, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+    private static final Participant BRUNO = new Participant(DietType.OMNIVORE, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
     private static final Participant SOPHIA = new Participant(DietType.PESCATARIAN, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
 
     @Test
@@ -75,15 +74,28 @@ public class CoverCalculatorTest {
     }
 
     @Test
-    public void vegetarian_covers_on_friday_return_string() {
+    public void vegetarian_covers_on_friday_return_2() {
+        // Given
+        Participant participant = new Participant(DietType.VEGETARIAN, DayOfWeek.THURSDAY, DayOfWeek.SUNDAY);
+        CoverCalculator coverCalculator = new CoverCalculator(asList(participant));
+
+        // When
+        int vegetarianCovers = coverCalculator.covers(DayOfWeek.FRIDAY, DietType.VEGETARIAN);
+
+        // Then
+        Assertions.assertThat(vegetarianCovers).isEqualTo(2);
+    }
+
+    /*@Test
+    public void cover_map_details() {
         // Given
         CoverCalculator coverCalculator = new CoverCalculator(asList(BRUNO, SOPHIA));
 
         // When
-        int pescatarianCovers = coverCalculator.covers(DayOfWeek.FRIDAY, DietType.VEGETARIAN);
+        Map<DietType, Integer> coverDetails = coverCalculator.coverDetails();
 
         // Then
-        Assertions.assertThat(pescatarianCovers).isEqualTo(0);
-    }
+        Assertions.assertThat(coverDetails).isEqualTo(0);
+    }*/
 
 }
